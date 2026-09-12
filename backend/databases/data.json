@@ -1,0 +1,29 @@
+[
+  {
+    "itemName": "Black leather wallet",
+    "type": "found",
+    "place": "Library",
+    "date": "2026-09-05",
+    "contact": "zeeshan@college.edu",
+    "id": 1788952265401,
+    "status": "open"
+  },
+  {
+    "itemName": "water",
+    "type": "lost",
+    "place": "Cafe",
+    "date": "2026-09-09",
+    "contact": "shubh@gmail.com",
+    "id": 1788958707403,
+    "status": "open"
+  },
+  {
+    "itemName": "notebook",
+    "type": "lost",
+    "place": "classroom",
+    "date": "2026-10-19",
+    "contact": "shubhansh@gmail.com",
+    "id": 1789014252606,
+    "status": "open"
+  }
+]

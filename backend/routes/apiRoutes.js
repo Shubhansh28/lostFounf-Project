@@ -1,13 +1,11 @@
 const express = require('express');
 const fs = require("fs")
 const path = require("path")
+const validateCreate = require("../middlewares/validateCreate")
 const router = express.Router();
 const filePath = path.join(__dirname,"..","./databases","data.json")
-const app = express()
-const validateCreate = require("../middlewares/validateCreate")
-app.use(express.json())
 const rawdata = fs.readFileSync(filePath,"utf-8")
-const data = JSON.parse(rawdata)
+let data = JSON.parse(rawdata)
 // async function getUserData() {
 //   try {
 //     const rawdata = await readFile(filePath,'utf8');

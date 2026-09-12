@@ -1,0 +1,17 @@
+{
+  "tailwindCSS.experimental.configFile": "frontend/src/global.css",
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "javascriptreact": "javascriptreact",
+    "typescript": "typescript",
+    "typescriptreact": "typescriptreact"
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass"
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}

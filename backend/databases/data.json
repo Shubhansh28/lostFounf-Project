@@ -25,5 +25,14 @@
     "contact": "shubhansh@gmail.com",
     "id": 1789014252606,
     "status": "open"
+  },
+  {
+    "itemName": "macbook charger",
+    "type": "lost",
+    "place": "classroom 505",
+    "date": "2026-10-01",
+    "contact": "freefire@gmail.com",
+    "id": 1789214033215,
+    "status": "open"
   }
 ]

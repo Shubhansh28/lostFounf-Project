@@ -5,9 +5,9 @@ const cors = require("cors")
 const apiRoutes = require("./routes/apiRoutes")
 const app = express()
 app.use(cors())
-
+app.use(express.json())
 app.use("/api",apiRoutes)
 
 app.listen(3000,()=>{
-    console.log(`url :- \x1b[35m http://localhost:3000/api/items`);
+    console.log(`url :- \x1b[35m http://localhost:3000/api/items \x1b[0m`);
 })

@@ -1,1 +1,6 @@
+@import "./fonts.css";
 @import "tailwindcss";
+@theme {
+  --font-heading1: "Sour Gummy", sans-serif;
+  --font-heading2: "Coiny", sans-serif;
+}

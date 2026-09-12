@@ -1,10 +1,11 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect,useState,useRef } from 'react'
 import "./global.css"
 
 const App = () => {
   const [data,setData] = useState([])
+  const [popup,setPopup] = useState(false)
+  const inputRef = useRef(null)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,15 +18,89 @@ const App = () => {
     };
     fetchData();
   }, []);
+  
+  useEffect(()=>{
+    const handleClick = (e) => {
+      if (popup && inputRef.current && !inputRef.current.contains(e.target)) {
+        setPopup(false)
+      }
+    }
+    if (popup){
+      document.addEventListener('mousedown',handleClick)
+    }
+    return ()=>{document.removeEventListener('mousedown',handleClick)}
+  },[popup])
+
+  const fields = [
+  {
+    id: "name",
+    name: "itemName",
+    label: "Item Name",
+    placeholder: "Macbook pro charger",
+    type: "text",
+  },
+  {
+    id: "location",
+    name: "place",
+    label: "Place",
+    placeholder: "class room 505",
+    type: "text",
+  },
+  {
+    id: "date",
+    name: "date",
+    label: "Date",
+    placeholder: "select a date",
+    type: "text",
+  },
+  {
+    id: "contact",
+    name: "contact",
+    label: "Contact",
+    placeholder: "Enter your Contact",
+    type: "text",
+  },
+]
   return (
     <div className='w-screen h-screen'>
       
-      <div className='w-screen h-15 bg-[oklch(0.696_0.17_162.48)] p-3 flex justify-between mb-10' >
+      <div className={`w-screen h-15 bg-[oklch(0.696_0.17_162.48)] p-3 flex justify-between mb-10 relative ${popup?'pointer-events-none opacity-50':'pointer-events-auto'}`} >
         <h1 className='text-[#001d3d] font-bold text-3xl font-serif'>Lost & Found</h1>
-        <button className='p-1.5 bg-[#e9c46a] font-semibold rounded-lg'>Report New Item</button>
+        <button className='p-1.5 bg-[#e9c46a] font-semibold rounded-lg cursor-pointer' onClick={()=>{setPopup(!popup)}}>Report New Item</button>
       </div>
-      
-      <div className='w-screen h-fit bg-[#168aad] grid grid-cols-2 grid-flow-row gap-10 p-10 justify-items-center'>
+
+      {popup && (
+        <div className='w-1/3 h-3/4 bg-white absolute left-1/2 -translate-x-1/2 -translate-y-1/10 z-1 rounded-2xl' ref={inputRef}>
+          <h1 className='text-teal-800 text-center p-5 font-bold text-4xl font-heading2'>Report a New Item</h1>
+          <div className='p-5'>
+            {fields.map((field) => (
+              <div key={field.id} className="mb-3">
+                <label htmlFor={field.id}>{field.label}</label>
+                <input
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  name={field.name}
+                  id={field.id}
+                  className="w-full rounded-lg border border-gray-400 p-1.5 pl-2 outline-0"
+                  onFocus={field.id === "date"? (event) => {event.target.type = "date"}: undefined}
+                  onBlur={field.id === "date"? (event) => {if (!event.target.value) {event.target.type = "text"}}: undefined}
+                  required
+                />
+              </div>
+            ))}
+            
+            <label htmlFor='disc'>Discription</label>
+            <textarea name="discription"
+            id='disc'
+            className='w-full border border-gray-400 outline-0 p-1.5 pl-2 rounded-lg'
+            placeholder='Discription of your lost item'>
+            </textarea>
+
+          </div>
+        </div>
+      )}
+
+      <div className={`w-screen h-fit bg-[#168aad] grid grid-cols-2 grid-flow-row gap-10 p-10 justify-items-center ${popup?'pointer-events-none opacity-50':'pointer-events-auto'}`}>
         {data.map((el) => {
           return (
             <div key={el.id} className='bg-[#b5e48c] w-4/5 h-fit p-5 rounded-lg shadow-lg shadow-lime-500/10 pl-10'>
